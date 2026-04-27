@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez les services d'Immobilier Ether : puits, hydrogéologie, fosses septiques, pompes, forage et portail client.">
+    <meta name="keywords" content="services, puits, hydrogéologie, fosse septique, forage, pompes, Immobilier Ether">
+    
+    <title>Services | Immobilier Ether - Nos domaines d'expertise</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <style>
+        :root {
+            --blue: #0b3d78;
+            --blue-dark: #072e5b;
+            --blue-light: #6ea9db;
+            --orange: #f96b1d;
+            --orange-dark: #d4550f;
+            --text: #12345a;
+            --text-light: #5d7da2;
+            --white: #ffffff;
+            --bg: #f5f8fc;
+            --border-light: #d8e5f1;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 50px rgba(0,0,0,0.12);
+            --radius: 18px;
+            --radius-full: 999px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: #f7fbff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 14px 0;
+            font-size: 14px;
+        }
+
+        .topbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .top-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-left span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+        }
+
+        .top-left i {
+            color: var(--orange);
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 92px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--blue-dark);
+        }
+
+        .logo img {
+            height: 58px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text strong {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--blue-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--orange);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--orange);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--blue-dark);
+            cursor: pointer;
+        }
+
+        /* PAGE BANNER */
+        .page-banner {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-banner h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .page-banner p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section.alt {
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header span {
+            display: inline-block;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 42px);
+            color: var(--blue-dark);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* SERVICES GRID */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #e8eef4;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--blue-light);
+        }
+
+        .service-card.featured {
+            border: 2px solid var(--orange);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .service-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, var(--blue-light), var(--blue));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .service-icon i {
+            font-size: 36px;
+            color: white;
+        }
+
+        .service-card h3 {
+            color: var(--blue-dark);
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        .service-features {
+            margin: 15px 0;
+        }
+
+        .service-features li {
+            padding: 7px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .service-features i {
+            color: var(--orange);
+            margin-right: 10px;
+        }
+
+        .service-link {
+            color: var(--blue);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+            margin-top: auto;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+            color: var(--orange);
+        }
+
+        /* BOUTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 32px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn.primary {
+            background: var(--orange);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(249, 107, 29, 0.3);
+        }
+
+        .btn.primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn.outline {
+            background: transparent;
+            color: var(--blue);
+            border: 2px solid var(--blue);
+        }
+
+        .btn.outline:hover {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        /* PROCESS SECTION */
+        .process-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            color: white;
+        }
+
+        .process-section .section-header span {
+            color: rgba(255,255,255,0.8);
+        }
+        .process-section .section-header h2 {
+            color: white;
+        }
+        .process-section .section-description {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            font-weight: 800;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .process-step h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        /* PRICING */
+        .pricing-section {
+            padding: 80px 0;
+            background: var(--bg);
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--orange);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--orange);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .pricing-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--blue-light), var(--blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .pricing-icon i {
+            font-size: 36px;
+            color: white;
+        }
+
+        .pricing-card h4 {
+            color: var(--blue-dark);
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .pricing-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--orange);
+            margin-bottom: 18px;
+        }
+
+        .pricing-price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: #999;
+        }
+
+        .pricing-features {
+            margin: 20px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: #666;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features i {
+            color: var(--orange);
+            margin-right: 8px;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            color: white;
+            padding: 80px 0;
+        }
+
+        .cta-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-text h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .cta-text p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #0a2a4a;
+            color: #a8c4e0;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #a8c4e0;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--orange);
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info i {
+            width: 20px;
+            color: var(--orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #a8c4e0;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav {
+                position: absolute;
+                top: 100%;
+                right: 5%;
+                background: var(--white);
+                border: 1px solid var(--border-light);
+                border-radius: var(--radius);
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                min-width: 260px;
+                display: none;
+                box-shadow: var(--shadow-lg);
+            }
+            nav.active {
+                display: flex;
+            }
+            nav a {
+                width: 100%;
+                padding: 12px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 32px;
+            }
+            .services-grid, .process-steps, .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            .cta-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+    <div class="container topbar-content">
+        <div class="top-left">
+            <span><i class="fa-solid fa-location-dot"></i> Québec, QC</span>
+            <span><i class="fa-solid fa-phone"></i> 1-800-XXX-XXXX</span>
+        </div>
+    </div>
+</div>
+
+<!-- Header -->
+<header id="header">
+    <div class="container navbar">
+        <a th:href="@{/}" class="logo">
+            <img th:src="@{/image/logo.png}" alt="Logo Immobilier Ether">
+            <div class="logo-text">
+                <strong>Immobilier Ether</strong>
+                <span>Expertise • Conformité • Innovation</span>
+            </div>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav id="navMenu">
+            <a th:href="@{/}">Accueil</a>
+            <a th:href="@{/services}" class="active">Services</a>
+            <a th:href="@{/videos}">Vidéos</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Bannière -->
+    <section class="page-banner">
+        <div class="container">
+            <h1 data-aos="fade-up">Nos services</h1>
+            <p data-aos="fade-up" data-aos-delay="100">
+                Des solutions complètes et adaptées à vos besoins
+            </p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a th:href="@{/}">Accueil</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span>Services</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="section alt">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span>Ce que nous offrons</span>
+                <h2>Nos domaines d'intervention</h2>
+                <p class="section-description">
+                    Des services spécialisés pour répondre à tous vos besoins
+                </p>
+            </div>
+
+            <div class="services-grid">
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <h3>Puits & Hydrogéologie</h3>
+                    <p class="service-description">
+                        Études hydrogéologiques complètes, forage de puits artésiens et supervision 
+                        spécialisée pour tous vos projets.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Étude de nappe phréatique</li>
+                        <li><i class="fa-solid fa-check"></i> Forage et installation de puits</li>
+                        <li><i class="fa-solid fa-check"></i> Analyse de qualité d'eau</li>
+                        <li><i class="fa-solid fa-check"></i> Géothermie</li>
+                    </ul>
+                </div>
+
+                <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-badge">Populaire</div>
+                    <div class="service-icon">
+                        <i class="fa-solid fa-house-circle-check"></i>
+                    </div>
+                    <h3>Fosses Septiques</h3>
+                    <p class="service-description">
+                        Étude de sols, conception, installation et suivi de dossier pour des 
+                        solutions septiques performantes et conformes.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Étude de caractérisation</li>
+                        <li><i class="fa-solid fa-check"></i> Design et installation</li>
+                        <li><i class="fa-solid fa-check"></i> Conformité réglementaire</li>
+                        <li><i class="fa-solid fa-check"></i> Suivi de dossier</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-faucet-drip"></i>
+                    </div>
+                    <h3>Pompes & Traitement</h3>
+                    <p class="service-description">
+                        Installation, remplacement et entretien de systèmes de pompage et 
+                        traitement d'eau pour une performance optimale.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Installation de pompes</li>
+                        <li><i class="fa-solid fa-check"></i> Systèmes de traitement</li>
+                        <li><i class="fa-solid fa-check"></i> Maintenance préventive</li>
+                        <li><i class="fa-solid fa-check"></i> Dépannage d'urgence</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-mountain"></i>
+                    </div>
+                    <h3>Forage</h3>
+                    <p class="service-description">
+                        Forage géotechnique et environnemental pour divers types de projets, 
+                        avec équipement spécialisé et expertise technique.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Forage géotechnique</li>
+                        <li><i class="fa-solid fa-check"></i> Forage environnemental</li>
+                        <li><i class="fa-solid fa-check"></i> Échantillonnage</li>
+                        <li><i class="fa-solid fa-check"></i> Monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-file-circle-check"></i>
+                    </div>
+                    <h3>Portail Client</h3>
+                    <p class="service-description">
+                        Suivi en temps réel de vos projets, dépôt de documents et consultation 
+                        de l'état d'avancement en toute transparence.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Suivi des étapes</li>
+                        <li><i class="fa-solid fa-check"></i> Dépôt de documents</li>
+                        <li><i class="fa-solid fa-check"></i> Consultation 24/7</li>
+                        <li><i class="fa-solid fa-check"></i> Historique complet</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3>Sous-traitants</h3>
+                    <p class="service-description">
+                        Collaboration avec des partenaires qualifiés, soumissions et gestion 
+                        centralisée des demandes pour une exécution optimale.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fa-solid fa-check"></i> Soumissions</li>
+                        <li><i class="fa-solid fa-check"></i> Collaboration</li>
+                        <li><i class="fa-solid fa-check"></i> Gestion centralisée</li>
+                        <li><i class="fa-solid fa-check"></i> Partenaires qualifiés</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Processus -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span>Notre méthode</span>
+                <h2>Comment nous travaillons</h2>
+                <p class="section-description">
+                    Un processus clair et transparent pour chaque projet
+                </p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <h4>Consultation initiale</h4>
+                    <p>Évaluation de vos besoins et définition du projet</p>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <h4>Étude et analyse</h4>
+                    <p>Études techniques et analyse de faisabilité</p>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <h4>Réalisation</h4>
+                    <p>Exécution des travaux selon les normes</p>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">4</div>
+                    <h4>Suivi et support</h4>
+                    <p>Accompagnement continu et maintenance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span>Nos offres</span>
+                <h2>Des solutions adaptées à chaque projet</h2>
+                <p class="section-description">
+                    Choisissez l'offre qui correspond à vos besoins
+                </p>
+            </div>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-icon">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <h4>Consultation</h4>
+                    <div class="pricing-price">
+                        Gratuit
+                        <small>/première consultation</small>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Évaluation initiale</li>
+                        <li><i class="fa-solid fa-check"></i> Recommandations</li>
+                        <li><i class="fa-solid fa-check"></i> Estimation budgétaire</li>
+                        <li><i class="fa-solid fa-check"></i> Réponses aux questions</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-badge">Le plus populaire</div>
+                    <div class="pricing-icon">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <h4>Projet Standard</h4>
+                    <div class="pricing-price">
+                        Sur devis
+                        <small>/projet</small>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Étude complète</li>
+                        <li><i class="fa-solid fa-check"></i> Planification détaillée</li>
+                        <li><i class="fa-solid fa-check"></i> Exécution des travaux</li>
+                        <li><i class="fa-solid fa-check"></i> Suivi personnalisé</li>
+                        <li><i class="fa-solid fa-check"></i> Accès au portail client</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-icon">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <h4>Entreprise</h4>
+                    <div class="pricing-price">
+                        Sur mesure
+                        <small>/contrat</small>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Accompagnement dédié</li>
+                        <li><i class="fa-solid fa-check"></i> Gestion multi-projets</li>
+                        <li><i class="fa-solid fa-check"></i> Support prioritaire</li>
+                        <li><i class="fa-solid fa-check"></i> Rapport mensuel</li>
+                        <li><i class="fa-solid fa-check"></i> Tarifs préférentiels</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <div class="cta-text">
+                    <h2>Prêt à démarrer votre projet ?</h2>
+                    <p>Contactez-nous pour une consultation gratuite</p>
+                </div>
+                <div>
+                    <a th:href="@{/contact}" class="btn primary">
+                        Nous contacter
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img th:src="@{/image/logo.png}" alt="Logo Immobilier Ether">
+                    <span>Immobilier Ether</span>
+                </div>
+                <p>Expertise • Conformité • Innovation pour des projets durables et conformes.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a th:href="@{/}">Accueil</a></li>
+                    <li><a th:href="@{/services}">Services</a></li>
+                    <li><a th:href="@{/videos}">Vidéos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Puits et hydrogéologie</a></li>
+                    <li><a href="#">Fosses septiques</a></li>
+                    <li><a href="#">Pompes et traitement</a></li>
+                    <li><a href="#">Forage</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-info">
+                    <li><i class="fa-solid fa-location-dot"></i> Québec, QC, Canada</li>
+                    <li><i class="fa-solid fa-phone"></i> 1-800-XXX-XXXX</li>
+                    <li><i class="fa-regular fa-envelope"></i> info@immobilierether.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Immobilier Ether. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Politique de confidentialité</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true, offset: 100 });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)';
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+        } else {
+            header.style.boxShadow = 'none';
+            header.style.background = 'rgba(255, 255, 255, 0.96)';
+        }
+    });
+</script>
+
+</body>
+</html>

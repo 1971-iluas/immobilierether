@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez nos vidéos de présentation et tutoriels. Immobilier Ether en images.">
+    <meta name="keywords" content="vidéos, tutoriels, présentation, Immobilier Ether, environnement, hydrologie">
+    
+    <title>Vidéos | Immobilier Ether - Ressources et tutoriels</title>
+    
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <style>
+        :root {
+            --blue: #0b3d78;
+            --blue-dark: #072e5b;
+            --blue-light: #6ea9db;
+            --orange: #f96b1d;
+            --orange-dark: #d4550f;
+            --white: #ffffff;
+            --bg: #f5f8fc;
+            --text: #12345a;
+            --text-light: #5d7da2;
+            --border-light: #d8e5f1;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 50px rgba(0,0,0,0.12);
+            --radius: 18px;
+            --radius-full: 999px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           TOPBAR
+           ============================================ */
+        .topbar {
+            background: #f7fbff;
+            border-bottom: 1px solid var(--border-light);
+            padding: 14px 0;
+            font-size: 14px;
+        }
+
+        .topbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .top-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .top-left span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+        }
+
+        .top-left i {
+            color: var(--orange);
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 92px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--blue-dark);
+        }
+
+        .logo img {
+            height: 58px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text strong {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--blue-dark);
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background: var(--orange);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--orange);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--blue-dark);
+            cursor: pointer;
+        }
+
+        /* ============================================
+           PAGE BANNER
+           ============================================ */
+        .page-banner {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .page-banner h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .page-banner p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        /* ============================================
+           SECTION HEADER
+           ============================================ */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section.alt {
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header span {
+            display: inline-block;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 4vw, 42px);
+            color: var(--blue-dark);
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           VIDEO GRID
+           ============================================ */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--blue-light);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px;
+            height: 65px;
+            background: rgba(249, 107, 29, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-overlay {
+            background: var(--orange);
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .video-info {
+            padding: 25px;
+        }
+
+        .video-info .video-title {
+            color: var(--blue-dark);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .video-info .video-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           VIDEO MODAL
+           ============================================ */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--orange);
+        }
+
+        .modal-video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .cta-section {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            color: white;
+            padding: 70px 0;
+        }
+
+        .cta-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .cta-text h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .cta-text p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 32px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn.primary {
+            background: var(--orange);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(249, 107, 29, 0.3);
+        }
+
+        .btn.primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #0a2a4a;
+            color: #a8c4e0;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 18px;
+            font-size: 18px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #a8c4e0;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--orange);
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info i {
+            width: 20px;
+            color: var(--orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #a8c4e0;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .videos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav {
+                position: absolute;
+                top: 100%;
+                right: 5%;
+                background: var(--white);
+                border: 1px solid var(--border-light);
+                border-radius: var(--radius);
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                min-width: 260px;
+                display: none;
+                box-shadow: var(--shadow-lg);
+            }
+            nav.active {
+                display: flex;
+            }
+            nav a {
+                width: 100%;
+                padding: 12px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 32px;
+            }
+            .videos-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+            }
+            .cta-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Topbar (simplifiée) -->
+<div class="topbar">
+    <div class="container topbar-content">
+        <div class="top-left">
+            <span><i class="fa-solid fa-location-dot"></i> Québec, QC</span>
+            <span><i class="fa-solid fa-phone"></i> 1-800-XXX-XXXX</span>
+        </div>
+    </div>
+</div>
+
+<!-- Header -->
+<header id="header">
+    <div class="container navbar">
+        <a th:href="@{/}" class="logo">
+            <img th:src="@{/image/logo.png}" alt="Logo Immobilier Ether">
+            <div class="logo-text">
+                <strong>Immobilier Ether</strong>
+                <span>Expertise • Conformité • Innovation</span>
+            </div>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav id="navMenu">
+            <a th:href="@{/}">Accueil</a>
+            <a th:href="@{/services}">Services</a>
+            <a th:href="@{/videos}" class="active">Vidéos</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Bannière -->
+    <section class="page-banner">
+        <div class="container">
+            <h1 data-aos="fade-up">Ressources vidéo</h1>
+            <p data-aos="fade-up" data-aos-delay="100">
+                Découvrez notre expertise en images
+            </p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a th:href="@{/}">Accueil</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span>Vidéos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vidéos -->
+    <section class="section alt">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span>À visionner</span>
+                <h2>Nos vidéos</h2>
+                <p class="section-description">
+                    Des présentations et tutoriels pour mieux comprendre nos services
+                </p>
+            </div>
+
+            <div class="videos-grid">
+                
+                <!-- Vidéo 1 : mAXopZSia98 -->
+                <div class="video-card" data-video-id="mAXopZSia98" data-aos="fade-up" data-aos-delay="100">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/mAXopZSia98/maxresdefault.jpg" 
+                             alt="Présentation Immobilier Ether">
+                        <div class="play-overlay">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Présentation de l'entreprise</div>
+                        <div class="video-desc">
+                            Découvrez Immobilier Ether, notre mission et notre expertise en environnement, 
+                            hydrologie et génie civil. Un aperçu complet de nos services et de notre équipe.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vidéo 2 : pDUShJQV_d4 -->
+                <div class="video-card" data-video-id="pDUShJQV_d4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/pDUShJQV_d4/maxresdefault.jpg" 
+                             alt="Services et expertise">
+                        <div class="play-overlay">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Services et expertise</div>
+                        <div class="video-desc">
+                            Un tour d'horizon détaillé de nos domaines d'intervention : puits artésiens, 
+                            fosses septiques, pompes et systèmes de traitement d'eau.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vidéo 3 : mENEdUCgIUw -->
+                <div class="video-card" data-video-id="mENEdUCgIUw" data-aos="fade-up" data-aos-delay="300">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/mENEdUCgIUw/maxresdefault.jpg" 
+                             alt="Tutoriel fosse septique">
+                        <div class="play-overlay">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Fosses septiques et conformité</div>
+                        <div class="video-desc">
+                            Tout savoir sur l'installation, l'entretien et la conformité des fosses septiques. 
+                            Les étapes clés pour un projet réussi et conforme aux normes.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <div class="cta-text">
+                    <h2>Une question sur nos services ?</h2>
+                    <p>Notre équipe est à votre écoute</p>
+                </div>
+                <div class="cta-buttons">
+                    <a th:href="@{/services}" class="btn primary">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        Découvrir nos services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Modal Vidéo -->
+<div class="video-modal" id="videoModal">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Fermer">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="modal-video-wrapper">
+            <iframe id="modalVideo" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img th:src="@{/image/logo.png}" alt="Logo Immobilier Ether">
+                    <span>Immobilier Ether</span>
+                </div>
+                <p>Expertise • Conformité • Innovation pour des projets durables et conformes.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a th:href="@{/}">Accueil</a></li>
+                    <li><a th:href="@{/services}">Services</a></li>
+                    <li><a th:href="@{/videos}">Vidéos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a th:href="@{/services}">Puits et hydrogéologie</a></li>
+                    <li><a th:href="@{/services}">Fosses septiques</a></li>
+                    <li><a th:href="@{/services}">Forage</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-info">
+                    <li><i class="fa-solid fa-location-dot"></i> Québec, QC, Canada</li>
+                    <li><i class="fa-solid fa-phone"></i> 1-800-XXX-XXXX</li>
+                    <li><i class="fa-regular fa-envelope"></i> info@immobilierether.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Immobilier Ether. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Politique de confidentialité</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+
+    // Menu mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Header scroll
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Modal vidéo
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const modalClose = document.getElementById('modalClose');
+    const videoCards = document.querySelectorAll('.video-card');
+
+    function openVideoModal(videoId) {
+        modal.classList.add('active');
+        modalVideo.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+        modal.classList.remove('active');
+        modalVideo.src = '';
+        document.body.style.overflow = '';
+    }
+
+    videoCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const videoId = card.dataset.videoId;
+            if (videoId) {
+                openVideoModal(videoId);
+            }
+        });
+    });
+
+    modalClose.addEventListener('click', closeVideoModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeVideoModal();
+        }
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeVideoModal();
+        }
+    });
+</script>
+
+</body>
+</html>
